@@ -5,6 +5,8 @@ const express = require("express");
 const homeController = require("../controller/homeController");
 const userController = require("../controller/userController");
 const doctorController = require("../controller/doctorController");
+const patientController = require("../controller/patientController");
+const specialtyController = require("../controller/specialtyController");
 
 let router = express.Router();
 
@@ -34,6 +36,35 @@ let initWebRoutes = (app) => {
   router.get(
     "/api/get-detail-doctor-by-id",
     doctorController.getDetailDoctorById
+  );
+
+  router.post("/api/bulk-create-schedule", doctorController.bulkCreateSchedule);
+  router.get(
+    "/api/get-schedule-doctor-by-date",
+    doctorController.getScheduleByDate
+  );
+  router.get(
+    "/api/get-extra-infor-doctor-by-id",
+    doctorController.getExtraDoctorInforById
+  );
+  router.get(
+    "/api/get-profile-doctor-by-id",
+    doctorController.getProfileDoctorById
+  );
+  router.post(
+    "/api/patient-book-appointment",
+    patientController.postBookAppointment
+  );
+  router.post(
+    "/api/verify-book-appointment",
+    patientController.postVerifyBookAppointment
+  );
+
+  router.post("/api/create-new-specialty", specialtyController.createSpecialty);
+  router.get("/api/get-all-specialty", specialtyController.getAllSpecialty);
+  router.get(
+    "/api/get-detail-specialty-by-id",
+    specialtyController.getDetailSpecialtyById
   );
 
   return app.use("/", router);
